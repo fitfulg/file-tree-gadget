@@ -1,23 +1,31 @@
+import { useState } from "react"
 
 function App() {
   return(
     <div>
-      <Folder name='Desktop'>
-      <File name='dogs.jpeg' />
-      <File name='cats.png' />
+      <Folder name='Desktop'> 
+        <Folder name='Music'>
+          <File name='all_star.mp4' />
+          <File name='express_file.mp4' />
+        </Folder>
+        <File name='dogs.jpeg' />
+        <File name='cats.png' />
       </Folder>
 
       <Folder name='Applications' />
     </div>
   )}
 
-  const Folder = (props) => {
-    console.log(props);
+  const Folder = ({ name, children }) => { 
+    const [isOpen, setIsOpen] = useState(true);
     
+    // const handleClick = () => setIsOpen(!isOpen);
     return (
-      <div style={{ border: '2px solid pink' }}>
-        {props.name}
-        {props.children}
+      <div>
+        <span onClick={() => setIsOpen(!isOpen)}>{name}</span>
+        <div style={{ marginLeft: '17px' }}>
+          {isOpen && children}
+        </div>
       </div>
     )}
 
